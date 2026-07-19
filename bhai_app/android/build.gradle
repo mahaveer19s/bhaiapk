@@ -1,7 +1,7 @@
 buildscript {
-    ext.compileSdkVersion = 36
+    ext.compileSdkVersion = 34
     ext.minSdkVersion = 23
-    ext.targetSdkVersion = 36
+    ext.targetSdkVersion = 34
 }
 
 allprojects {
@@ -18,9 +18,9 @@ subprojects {
 subprojects {
     if (project.name != "app") {
         project.ext.flutter = [
-            compileSdkVersion: 36,
+            compileSdkVersion: 34,
             minSdkVersion: 23,
-            targetSdkVersion: 36,
+            targetSdkVersion: 34,
             ndkVersion: "25.1.8937393"
         ]
     }
