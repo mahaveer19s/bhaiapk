@@ -167,7 +167,7 @@ class SosActivationService {
     if (token == null) return;
 
     try {
-      final pb = PocketBase('http://10.208.241.82:8080');
+      final pb = PocketBase('https://bhaiapk.onrender.com');
       pb.authStore.save(token, null);
 
       final pbEvent = await pb.collection('emergency_events').create(body: {
@@ -192,7 +192,7 @@ class SosActivationService {
     if (token == null) return;
 
     try {
-      final pb = PocketBase('http://10.208.241.82:8080');
+      final pb = PocketBase('https://bhaiapk.onrender.com');
       pb.authStore.save(token, null);
 
       await pb.collection('emergency_events').update(eventId, body: {
