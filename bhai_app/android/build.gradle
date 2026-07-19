@@ -29,6 +29,19 @@ subprojects {
         android {
             namespace = "com.bhai.bhai_app.${project.name}"
         }
+
+        project.tasks.matching { it.name.startsWith("process") && it.name.endsWith("Manifest") }.configureEach { task ->
+            task.doFirst {
+                def manifestFile = project.file("src/main/AndroidManifest.xml")
+                if (manifestFile.exists()) {
+                    def content = manifestFile.text
+                    if (content.contains('package=')) {
+                        content = content.replaceAll(/package="[^"]*"/, "")
+                        manifestFile.text = content
+                    }
+                }
+            }
+        }
     }
     plugins.withId('com.android.application') {
         android {
