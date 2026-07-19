@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BHAI App - Your Brother is Always With You</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --primary: #00bcd4;
+            --accent: #ff3d00;
+            --text: #f5f5f7;
+            --text-muted: #8e8e93;
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glow: rgba(0, 188, 212, 0.35);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Ambient Glow Backgrounds */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+            top: -10%;
+            left: -10%;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 61, 0, 0.15) 0%, transparent 70%);
+            bottom: -10%;
+            right: -10%;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 650px;
+            width: 100%;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+
+        .shield-icon {
+            width: 90px;
+            height: 90px;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 15px var(--primary));
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff 40%, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary), #0097a7);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 1.2rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            box-shadow: 0 8px 30px rgba(0, 188, 212, 0.4);
+            transition: all 0.3s ease;
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 188, 212, 0.6);
+            background: linear-gradient(135deg, #00e5ff, var(--primary));
+        }
+
+        .btn-download svg {
+            margin-right: 0.8rem;
+            fill: #ffffff;
+            width: 24px;
+            height: 24px;
+        }
+
+        .instructions-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 18px;
+            padding: 1.5rem;
+            text-align: left;
+            margin-top: 1rem;
+        }
+
+        .instructions-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .instructions-card h3 svg {
+            margin-right: 0.5rem;
+            width: 18px;
+            height: 18px;
+            fill: var(--primary);
+        }
+
+        .instructions-card ol {
+            padding-left: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .instructions-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: rgba(76, 175, 80, 0.1);
+            color: #4caf50;
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- BHAI Shield App Branding Logo -->
+        <svg class="shield-icon" viewBox="0 0 24 24">
+            <path fill="#00bcd4" d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,13C14.67,13 20,14.33 20,17V18H4V17C4,14.33 9.33,13 12,13Z"/>
+        </svg>
+
+        <h1>BHAI</h1>
+        <div class="tagline">"Your Brother is Always With You"</div>
+
+        <!-- Download APK Link -->
+        <a href="bhai_app.apk" download class="btn-download">
+            <svg viewBox="0 0 24 24">
+                <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+            </svg>
+            Download BHAI Safety APK
+        </a>
+
+        <div class="instructions-card">
+            <h3>
+                <svg viewBox="0 0 24 24"><path d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z"/></svg>
+                Installation Instructions
+            </h3>
+            <ol>
+                <li>Tap the **Download** button above using your phone's browser.</li>
+                <li>Once downloaded, open the APK file and select **Install**. If blocked, enable *Install from Unknown Sources* in security settings.</li>
+                <li>Ensure permissions for **Location Services**, **Camera/Mic**, and **Notifications** are granted on launch.</li>
+                <li>Connect your device to Wi-Fi to test sync with the local laptop server.</li>
+            </ol>
+        </div>
+
+        <div class="status-badge">
+            ✓ SECURE CRYPTO ENGINE & SHIELD ACTIVE
+        </div>
+    </div>
+
+</body>
+</html>

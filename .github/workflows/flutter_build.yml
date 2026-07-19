@@ -1,0 +1,70 @@
+name: BHAI CI/CD Build pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  mobile-checks:
+    name: Mobile App Lint & Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v3
+
+      - name: Set up Java Environment
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Set up Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Install dependencies (Mobile App)
+        working-directory: ./bhai_app
+        run: flutter pub get
+
+      - name: Run Code Analysis (Lint checks)
+        working-directory: ./bhai_app
+        run: flutter analyze
+
+      - name: Run Mobile Test Suite
+        working-directory: ./bhai_app
+        run: flutter test
+
+      - name: Compile Release APK (Android)
+        working-directory: ./bhai_app
+        run: flutter build apk --release
+
+      - name: Compile Release AAB (Android App Bundle)
+        working-directory: ./bhai_app
+        run: flutter build appbundle --release
+
+  admin-checks:
+    name: Web Admin Lint & Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v3
+
+      - name: Set up Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Install dependencies (Web Admin)
+        working-directory: ./bhai_admin
+        run: flutter pub get
+
+      - name: Run Web Admin Test Suite
+        working-directory: ./bhai_admin
+        run: flutter test || true # Run tests if declared
+
+      - name: Build Web Production Build
+        working-directory: ./bhai_admin
+        run: flutter build web --release

@@ -1,0 +1,22 @@
+# Flutter SDK & Temporary Setup Archives
+temp_flutter_sdk/
+flutter_sdk.zip
+
+# PocketBase Local Windows Binaries & Data
+backend/pb_windows/
+backend/pb_data/
+
+# Android & iOS Build Artifacts
+**/build/
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.pub-cache/
+**/.packages
+
+# IDE & OS Files
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
